@@ -16,7 +16,7 @@ router.get('/items', function(req, res, next){
 });
 
 //get one item
-router.get('/item/:id', function(req, res, next){
+router.get('/get/:id', function(req, res, next){
   Item.findById(req.params.id, function(err, item){
     if(err){
       res.status(500).json(err);
@@ -28,7 +28,7 @@ router.get('/item/:id', function(req, res, next){
 });
 
 //post- create an item
-router.post('/createItem', function(req, res, next){
+router.post('/create', function(req, res, next){
   var newItem = new Item(req.body);
   newItem.save(function(err, item){
     if(err){
@@ -41,7 +41,7 @@ router.post('/createItem', function(req, res, next){
 });
 
 //put-update an item
-router.put('/updateItem/:id', function(req, res, next){
+router.put('/update/:id', function(req, res, next){
   var updateItem = {'name':req.body.name, 'price':req.body.price, 'description':req.body.description};
   var options = {new:true};
   Item.findByIdAndUpdate(req.params.id, function(err, item){
@@ -53,5 +53,18 @@ router.put('/updateItem/:id', function(req, res, next){
     }
   });
 });
+
+//delete an item
+router.delete('/delete/:id', function(req, res, next){
+  Item.findByIdAndRemove(req.params.id, function(err, item){
+    if(err){
+      res.status(500).json(err);
+    }
+    else{
+      res.status(200).json(item);
+    }
+  });
+});
+
 
 module.exports = router;

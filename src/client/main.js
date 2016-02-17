@@ -8,5 +8,8 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/addNewItem', {
       templateUrl: 'partials/addNewItem.html'
     })
+    .when('/userItems', {
+      templateUrl: 'partials/userItems.html'
+    })
     .otherwise({redirectTo: '/'});
 }]);
