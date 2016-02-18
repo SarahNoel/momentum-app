@@ -40,11 +40,13 @@ router.post('/create', function(req, res, next){
   });
 });
 
-//put-update an item
-router.put('/update/:id', function(req, res, next){
-  var updateItem = {'name':req.body.name, 'price':req.body.price, 'description':req.body.description};
+//put-update streak for an item
+router.put('/updateStreak/:id', function(req, res, next){
+  console.log(req.body);
+  var updateItem = {'lastDay':req.body.lastDay, 'streak':req.body.streak};
   var options = {new:true};
-  Item.findByIdAndUpdate(req.params.id, function(err, item){
+  Item.findByIdAndUpdate(req.params.id, updateItem, options, function(err, item){
+    console.log('HELLO??', err, item);
     if(err){
       res.status(500).json(err);
     }

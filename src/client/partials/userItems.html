@@ -1,15 +1,23 @@
 <div ng-controller='userItemsCtrl'>
 
-  <ul ng-repeat= 'item in allItems'>
-    <li><h3>{{item.name}}</h3></li>
+<h2>Your Tasks</h2>
+  <ul ng-repeat= 'item in allItems | orderBy:_id'>
+    <h3>{{item.name}}</h3>
     <li>{{item.description}}</li>
-    <li>Current Streak: {{item.streak}} Days</li>
-    <li>Last Completed: {{item.lastDay}} </li>
-    <li><button ng-click='doToday(item._id)' class = 'btn btn-success'><span class = 'glyphicon glyphicon-ok'></span></button></li>
+    <li>Current Streak: {{item.streak}}
+      <ng-pluralize  count = 'item.streak' when = "{'1': 'Day', 'other': 'Days'}"></ng-pluralize></li>
+
+    <li ng-hide = 'doneToday(item.lastDay)'>Last Completed: Today! </li>
+
+    <li ng-show = 'doneToday(item.lastDay)'>Last Completed: {{item.lastDay | doneFilter}} </li>
+
+    <button ng-if = 'doneToday(item.lastDay)' button ng-click='doToday(item._id, item.streak)' class = 'btn btn-success'><span class = 'glyphicon glyphicon-ok'></span></button>
 
   </ul>
 
-  <a href = '/#/addNewItem'<button class='btn btn-warning'>Add New ToDo</button></a>
+  <br>
+
+  <ul><a href = '/#/addNewItem'<button class='btn btn-warning'>Add New ToDo</button></a></ul>
 
 
 </div>
