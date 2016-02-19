@@ -53,6 +53,15 @@ app.controller('userItemsCtrl', ['$scope', '$http', '$filter', function($scope, 
     }
   };
 
+  //delete Item
+  $scope.deleteItem = function(id){
+   $http.delete('/items/delete/' + id)
+    .then(function(data){
+      getAllItems();
+    });
+  };
+
+
   //get Items on load
   getAllItems();
 
