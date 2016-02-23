@@ -1,3 +1,5 @@
+//--------------FILTER FOR COMPLETE-------------------//
+
 app.filter('doneFilter', function(){
   return function(input){
     if(input){
@@ -19,3 +21,10 @@ app.filter('doneFilter', function(){
   };
 });
 
+
+//--------------USER FACTORY-------------------//
+
+app.factory('UserServices', ['$http', function($http){
+
+
+  }]);

@@ -1,4 +1,5 @@
-var app = angular.module('momentumApp', ['ngRoute']);
+var app = angular.module('momentumApp', ['ngRoute', 'satellizer'
+]);
 
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
@@ -11,5 +12,12 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/userItems', {
       templateUrl: 'partials/userItems.html'
     })
+    .when('/userLogin', {
+      templateUrl: 'partials/userLogin.html'
+    })
+     .when('/userRegister', {
+      templateUrl: 'partials/userRegister.html'
+    })
     .otherwise({redirectTo: '/'});
 }]);
+

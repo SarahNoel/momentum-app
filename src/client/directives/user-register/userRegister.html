@@ -1,0 +1,23 @@
+<br><br>
+
+<div class='register-div'>
+  <h1>Signup!</h1>
+
+  <form method="post" ng-submit="signup()" name="signupForm">
+    <div class="form-group">
+      <input class="form-control input-lg" type="email" id="email" name="email" ng-model="userForm.email" placeholder="Email" required autocomplete='off'>
+    </div>
+    <div class="form-group">
+      <input class="form-control input-lg" type="password" name="password" ng-model="userForm.password" placeholder="Password" autocomplete='off' required>
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-block btn-primary">Register</button>
+  </form>
+  <br>
+  <a href = "/#/userLogin"><button type='button'class='btn btn-success centered' ng-click="showRegister = false">Already Have an Account?</button></a>
+
+  <h3 class = 'center'>{{errorMessage}}</h3>
+
+</div>
+
+

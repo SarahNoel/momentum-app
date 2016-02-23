@@ -42,11 +42,24 @@ router.post('/create', function(req, res, next){
 
 //put-update streak for an item
 router.put('/updateStreak/:id', function(req, res, next){
-  console.log(req.body);
   var updateItem = {'lastDay':req.body.lastDay, 'streak':req.body.streak};
   var options = {new:true};
   Item.findByIdAndUpdate(req.params.id, updateItem, options, function(err, item){
-    console.log('HELLO??', err, item);
+    if(err){
+      res.status(500).json(err);
+    }
+    else{
+      res.status(200).json(item);
+    }
+  });
+});
+
+
+//put-reset streak for an item
+router.put('/resetStreak/:id', function(req, res, next){
+  var updateItem = {'streak':0};
+  var options = {new:true};
+  Item.findByIdAndUpdate(req.params.id, updateItem, options, function(err, item){
     if(err){
       res.status(500).json(err);
     }
