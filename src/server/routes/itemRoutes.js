@@ -1,16 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var deepPopulate = require("mongoose-deep-populate")(mongoose);
 var Item = mongoose.model('items');
+var User = mongoose.model('users');
 
-//get all items
-router.get('/items', function(req, res, next){
-  Item.find(function(err, items){
+
+//get all items from user
+router.get('/items/:id', function(req, res, next){
+  User.findById(req.params.id, function(err, data){})
+  .deepPopulate('items')
+  .exec(function(err, data){
+    console.log('err ', err, 'data ', data);
     if(err){
       res.status(500).json(err);
     }
     else{
-      res.status(200).json(items);
+      res.status(200).json(data);
     }
   });
 });
@@ -27,18 +33,30 @@ router.get('/get/:id', function(req, res, next){
   });
 });
 
-//post- create an item
+
+//post- create an item, save to user
 router.post('/create', function(req, res, next){
-  var newItem = new Item(req.body);
+  var newItem = new Item(req.body.newItem);
   newItem.save(function(err, item){
     if(err){
       res.status(500).json(err);
     }
     else{
-      res.status(200).json(item);
+      var options = {new:true};
+      var update = {$push:{items : newItem}};
+      User.findByIdAndUpdate(req.body.id, update, options)
+      .exec(function(err, data){
+        if(err){
+          res.status(500).json(err);
+        }
+        else{
+          res.status(200).json(data);
+        }
+      });
     }
   });
 });
+
 
 //put-update streak for an item
 router.put('/updateStreak/:id', function(req, res, next){

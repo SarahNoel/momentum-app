@@ -52,6 +52,7 @@ function createToken(user) {
 
 // *** register route *** //
 router.post('/signup', function(req, res) {
+  console.log('HERRO?');
   User.findOne({email: req.body.email}, function(err, existingUser) {
     if (existingUser) {
       return res.status(409).send({
@@ -63,8 +64,10 @@ router.post('/signup', function(req, res) {
       email: req.body.email,
       password: req.body.password,
     });
+    console.log(user);
     user.save(function() {
       var token = createToken(user);
+      console.log('token ', token);
       res.send({
         token: token,
         user: user

@@ -17,8 +17,12 @@
         <li ng-class="{'active': isActive('/addNewItem')}"><a href="/#/addNewItem">Add New <span class="sr-only">(current)</span></a></li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul ng-if = "!isLoggedIn()" class="nav navbar-nav navbar-right">
         <li><a href="/#/userLogin">Login</a></li>
+      </ul>
+
+      <ul ng-if = "isLoggedIn()" class="nav navbar-nav navbar-right">
+        <li ng-click='logout()'><a href="/#/">Logout</a></li>
       </ul>
 
     </div>

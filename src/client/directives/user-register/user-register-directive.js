@@ -2,7 +2,7 @@ app.directive('userRegister', function(){
     return {
       restrict: 'E',
       templateUrl: 'directives/user-register/userRegister.html',
-      controller: ['$scope', '$http', '$location', '$auth', function($scope, $http, $location, $auth) {
+      controller: ['$scope', '$http', '$location', '$auth', 'UserServices', function($scope, $http, $location, $auth, UserServices) {
 
         $scope.userForm = {};
 
@@ -10,11 +10,12 @@ app.directive('userRegister', function(){
         $scope.signup = function() {
           var user = {
             email: $scope.userForm.email.trim(),
-            password: $scope.userForm.password.trim()
+            password: $scope.userForm.password.trim(),
+            username: $scope.userForm.username.trim()
           };
           $auth.signup(user)
             .then(function(data){
-              $auth.login(user);
+              UserServices.storeUser(data.data.user);
               $location.path('/userItems');
             })
             .catch(function(data) {

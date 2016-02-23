@@ -26,5 +26,40 @@ app.filter('doneFilter', function(){
 
 app.factory('UserServices', ['$http', function($http){
 
+  var currentUser = '';
 
-  }]);
+  //checks for logged in user
+  function isLoggedIn(){
+    if(currentUser === ''){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  //stores user to access from all controllers
+  function storeUser(user){
+    currentUser = user;
+  }
+
+  //gets user
+  function getUser(){
+    if(currentUser === ''){
+      return false;
+    }
+    return currentUser;
+  }
+
+  //logout
+  function logout(){
+    currentUser = '';
+  }
+
+  return{
+    isLoggedIn: isLoggedIn,
+    storeUser: storeUser,
+    getUser: getUser,
+    logout: logout
+  };
+}]);
