@@ -4,6 +4,11 @@ app.directive('userLogin', function(){
       templateUrl: 'directives/user-login/userLogin.html',
       controller: ['$scope', '$http', '$location', '$window', '$rootScope', '$auth', 'UserServices', function($scope, $http, $location, $window, $rootScope, $auth, UserServices) {
 
+        $scope.userLogin = {};
+
+        $scope.userLogin.email = 'test@gmail.com';
+        $scope.userLogin.password = '123';
+
         $scope.login = function() {
           var user = {
             email: $scope.userLogin.email,

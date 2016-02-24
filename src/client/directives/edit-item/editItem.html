@@ -1,0 +1,35 @@
+<div>
+
+  <h1>Let's Add a To-Do!</h1>
+
+  <form name = 'editItemForm'>
+
+    <div class="form-group">
+      <label><h4>Name</h4></label>
+      <input ng-model='editItemForm.name' type="text" class="form-control" placeholder="Cardio" required>
+    </div>
+
+    <div class="form-group">
+      <label><h4>Description</h4></label>
+      <input ng-model='editItemForm.description' type="text" class="form-control" placeholder="Run ever day!" required>
+    </div>
+
+    <div class="form-group">
+      <label><h4>Deadline?</h4></label><br>
+      <form>
+        <input type="radio" ng-model='editItemForm.date' value='yes'> Yes<br>
+        <input type="radio" ng-model='editItemForm.date' value='no'> No<br>
+      </form>
+      <br>
+        <input ng-show='editItemForm.date == "yes"' type="date" ng-model='editItemForm.deadline' class="form-control" placeholder="06/15/16" >
+    </div>
+
+    <button ng-disabled='addItemForm.$invalid' type = 'button' ng-click = 'addItem()' class='btn btn-success'>Add Task</button>
+
+  </form>
+
+  <br><br>
+
+  <a href='/#/userItems'><button type = 'button' class='btn btn-danger'>See All Items</button></a>
+
+</div>
