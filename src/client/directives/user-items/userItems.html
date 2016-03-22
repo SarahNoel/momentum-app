@@ -1,5 +1,7 @@
 <div>
 
+<h1> Welcome, {{currentUser.username}}!</h1>
+
 <h2>Your Tasks</h2>
   <ul ng-repeat= 'item in allItems | orderBy:_id'>
     <h3>{{item.name}}</h3>

@@ -4,7 +4,7 @@ app.directive('userItems', function(){
       templateUrl: 'directives/user-items/userItems.html',
       controller: ['$scope', '$http', '$filter', 'UserServices', function($scope, $http, $filter, UserServices) {
 
-        var currentUser  = getUser();
+        $scope.currentUser  = getUser();
 
         //gets user
         function getUser(){
@@ -44,7 +44,7 @@ app.directive('userItems', function(){
             }
             //load all items
 
-            $http.get('/items/items/' + currentUser._id)
+            $http.get('/items/items/' + $scope.currentUser._id)
             .then(function(data){
               console.log(data);
               $scope.allItems = data.data.items;
